@@ -6,7 +6,12 @@
 }
 
 body {
-  background-color: #b0c9ae;
+  background: rgb(238, 174, 202);
+  background: linear-gradient(
+    59deg,
+    rgba(238, 174, 202, 1) 0%,
+    rgba(148, 187, 233, 1) 100%
+  );
 }
 
 #main {
@@ -24,19 +29,42 @@ body {
   font-family: Nats;
   font-size: 100px;
   font-weight: bold;
-  color: #3c6b38;
+  color: #14135d;
   padding-bottom: 10px;
 }
 
 #input-box {
   padding: 20px;
+  display: flex;
 }
 
 #song-input {
   font-family: Nats;
   font-size: 20px;
-  background-color: #d6d6d6;
+  background-color: #ebe8ff;
   min-width: 500px;
   border: none;
+  padding-left: 20px;
+  border-radius: 50px;
+  outline-color: #da95ff;
+}
+
+#go-button {
   padding-left: 10px;
+}
+
+#go-button button {
+  font-family: Nats;
+  font-size: 20px;
+  background-color: #14135d;
+  color: #ebe8ff;
+  border: none;
+  border-radius: 50px;
+  width: 45px;
+}
+
+#go-button button:hover {
+  background-color: #f1b5f1;
+  scale: 1.07;
+  transition: all 0.3s;
 }
