@@ -1,0 +1,42 @@
+@font-face {
+  font-family: "Nats";
+  src: url("./assets/NATS-Regular.ttf");
+  font-weight: normal;
+  font-style: normal;
+}
+
+body {
+  background-color: #b0c9ae;
+}
+
+#main {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+#title {
+  height: 250px;
+}
+
+#title p {
+  font-family: Nats;
+  font-size: 100px;
+  font-weight: bold;
+  color: #3c6b38;
+  padding-bottom: 10px;
+}
+
+#input-box {
+  padding: 20px;
+}
+
+#song-input {
+  font-family: Nats;
+  font-size: 20px;
+  background-color: #d6d6d6;
+  min-width: 500px;
+  border: none;
+  padding-left: 10px;
+}
