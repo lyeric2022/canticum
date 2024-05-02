@@ -2,9 +2,12 @@ import pandas as pd
 import numpy as np
 from sklearn.preprocessing import MinMaxScaler
 from sklearn.metrics.pairwise import cosine_similarity
+from pathlib import Path
+
+file = Path(__file__).parent / "dataset.csv"
 
 # Load dataset csv into music_data
-music_data = pd.read_csv('dataset.csv')
+music_data = pd.read_csv(file)
 
 # Use MinMax scaling to normalize data attributes
 scaler = MinMaxScaler()
