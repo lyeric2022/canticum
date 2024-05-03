@@ -1,0 +1,89 @@
+@font-face {
+  font-family: "Nats";
+  src: url("./assets/NATS-Regular.ttf");
+  font-weight: normal;
+  font-style: normal;
+}
+
+body {
+  background: rgb(238, 174, 202);
+  background: linear-gradient(
+    59deg,
+    rgba(238, 174, 202, 1) 0%,
+    rgba(148, 187, 233, 1) 100%
+  );
+  font-family: Nats;
+}
+
+#main {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+#title {
+  height: 250px;
+}
+
+#title p {
+  font-size: 100px;
+  font-weight: bold;
+  color: #14135d;
+  padding-bottom: 10px;
+}
+
+#input-box {
+  padding: 20px;
+  display: flex;
+}
+
+#song-input {
+  font-family: Nats;
+  font-size: 20px;
+  background-color: #ebe8ff;
+  min-width: 500px;
+  border: none;
+  padding-left: 20px;
+  border-radius: 50px;
+  outline-color: #da95ff;
+}
+
+#go-button {
+  padding-left: 10px;
+}
+
+#go-button button {
+  font-family: Nats;
+  font-size: 20px;
+  background-color: #14135d;
+  color: #ebe8ff;
+  border: none;
+  border-radius: 50px;
+  width: 45px;
+}
+
+#go-button button:hover {
+  background-color: #f1b5f1;
+  scale: 1.07;
+  transition: all 0.3s;
+}
+
+#desc-div {
+  display: flex;
+  flex-direction: column;
+
+  width: 500px;
+  padding-top: 150px;
+  padding-bottom: 100px;
+}
+
+#desc-div h1 {
+  align-self: center;
+  font-size: 30px;
+  color: #14135d;
+}
+
+#desc-div text {
+  font-size: 25px;
+}
