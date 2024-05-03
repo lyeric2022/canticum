@@ -12,6 +12,7 @@ body {
     rgba(238, 174, 202, 1) 0%,
     rgba(148, 187, 233, 1) 100%
   );
+  font-family: Nats;
 }
 
 #main {
@@ -26,7 +27,6 @@ body {
 }
 
 #title p {
-  font-family: Nats;
   font-size: 100px;
   font-weight: bold;
   color: #14135d;
@@ -67,4 +67,23 @@ body {
   background-color: #f1b5f1;
   scale: 1.07;
   transition: all 0.3s;
+}
+
+#desc-div {
+  display: flex;
+  flex-direction: column;
+
+  width: 500px;
+  padding-top: 150px;
+  padding-bottom: 100px;
+}
+
+#desc-div h1 {
+  align-self: center;
+  font-size: 30px;
+  color: #14135d;
+}
+
+#desc-div text {
+  font-size: 25px;
 }
