@@ -3,6 +3,9 @@ import numpy as np
 from sklearn.preprocessing import MinMaxScaler
 from sklearn.metrics.pairwise import cosine_similarity
 from pathlib import Path
+from flask import Flask, request
+
+app = Flask(__name__)
 
 file = Path(__file__).parent / "dataset.csv"
 
@@ -18,8 +21,17 @@ music_features_scaled = scaler.fit_transform(music_features)
 
 # Function to get music recommendations based on music features (content-based), genre, and popularity
 
+# Music Recommender API Route
 
-def hybrid_recommendations(input_song_name, num_recommendations=5, genre_weight=0.5, popularity_weight=0.3):
+
+@app.route('/recommender')
+def hybrid_recommendations():
+    # Get arguments as query parameters
+    input_song_name = request.args.get('input_song_name')
+    num_recommendations = int(request.args.get('num_recommendations', 5))
+    genre_weight = float(request.args.get('genre_weight', 0.5))
+    popularity_weight = float(request.args.get('popularity_weight', 0.3))
+
     # Print message and return if input track does not exist in database
     if input_song_name not in music_data['track_name'].values:
         print(
@@ -62,17 +74,12 @@ def hybrid_recommendations(input_song_name, num_recommendations=5, genre_weight=
     recommendations_df = recommendations_df.drop_duplicates(
         subset=['track_name', 'artists'], keep='first')
 
-    return recommendations_df
+    return recommendations_df.to_json(orient='records')
 
 
 def main():
-    # Replace with a song from your dataset
-    input_song_name = "All The Small Things"
-    recommendations = hybrid_recommendations(
-        input_song_name, num_recommendations=15)
-    print(f"Recommended songs for '{input_song_name}':")
-    print(recommendations)
+    return hybrid_recommendations()
 
 
 if __name__ == "__main__":
-    main()
+    app.run(debug=True)
