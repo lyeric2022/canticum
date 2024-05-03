@@ -14,7 +14,7 @@ function App() {
         </div>
       </div>
       <div id="desc-div">
-        <h1>about Cancticum</h1>
+        <h1>about</h1>
         <text>description</text>
         <h1>directions</h1>
         <text>directions</text>
