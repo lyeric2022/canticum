@@ -3,6 +3,10 @@ import { useNavigate } from "react-router-dom";
 import "./homepage.css";
 
 function Home() {
+  const navigate = useNavigate();
+  const recommend = () => {
+    navigate(`/recommendations`);
+  };
   return (
     <div id="main">
       <div id="title">
@@ -11,7 +15,7 @@ function Home() {
       <div id="input-box">
         <input id="song-input" type="text" placeholder="search for a song" />
         <div id="go-button">
-          <button>go!</button>
+          <button onClick={() => recommend()}>go!</button>
         </div>
       </div>
       <div id="desc-div">
