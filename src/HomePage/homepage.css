@@ -121,6 +121,11 @@ body {
   font-size: 25px;
 }
 
+.search-result {
+  min-width: 400px;
+  font-size: 20px;
+}
+
 .search-result:active {
   background-color: #f9f9f9;
   border-color: #14135d;
