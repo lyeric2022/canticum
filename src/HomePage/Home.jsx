@@ -46,10 +46,6 @@ function Home() {
           <button onClick={recommend}>go!</button>
         </div>
       </div>
-      <div id="desc-div">
-        <h1>About Canticum</h1>
-        <p>Description</p>
-      </div>
     </div>
   );
 }
