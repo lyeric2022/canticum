@@ -27,7 +27,7 @@ function Home() {
 
   const handleRecommendations = () => {
     if (!selectedSong) {
-      alert("Please select a song.");
+      alert("Please hit ENTER or select a song.");
       return;
     }
     navigate("/recommendations", { state: { selectedSong } });
@@ -57,9 +57,21 @@ function Home() {
         </div>
       </div>
       {searchResults && searchResults.length > 0 ? (
-        <ul>
+        <ul id="search-results-list">
+          {!selectedSong ? (
+            <h2>Please select a song:</h2>
+          ) : (
+            <h2>
+              Currently selected: {selectedSong.track_name} by{" "}
+              {selectedSong.artists}
+            </h2>
+          )}
           {searchResults.map((song) => (
-            <li key={song.track_id} onClick={() => handleSelectSong(song)}>
+            <li
+              className="search-result"
+              key={song.track_id}
+              onClick={() => handleSelectSong(song)}
+            >
               {song.track_name} - {song.artists}
             </li>
           ))}

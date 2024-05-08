@@ -25,12 +25,12 @@ function Recommendations() {
 
   return (
     <div>
-      <h1>Here are some recommendations 🎵</h1>
       <p id="back-home-link">
         <a href="/">back to home</a>
       </p>
+      <h1>Here are some recommendations 🎵</h1>
       {recommendations && recommendations.length > 0 ? (
-        <ul>
+        <ul id="recommendations-list">
           {recommendations.map((rec, index) => (
             <li key={index}>
               <p>

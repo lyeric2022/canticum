@@ -121,7 +121,19 @@ body {
   font-size: 25px;
 }
 
-.selected-song {
+.search-result:active {
+  background-color: #f9f9f9;
   border-color: #14135d;
-  border-width: 5px;
+  border-width: 3px;
+}
+
+#search-results {
+  padding-top: 0px;
+}
+
+#search-results-list h2 {
+  margin: 0px;
+  animation-name: fadeInFromBottom;
+  animation-duration: 1.5s;
+  animation-timing-function: ease-in;
 }

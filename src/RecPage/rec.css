@@ -44,6 +44,7 @@ h1 {
   text-align: center;
   color: #000000;
   margin-bottom: 5px;
+  margin-top: 5px;
 
   animation-name: fadeInFromTop;
   animation-timing-function: ease-in;
@@ -61,7 +62,6 @@ div.recommendations-container {
 
 ul {
   list-style: none;
-  /* padding: 20px; */
 }
 
 li {
@@ -94,7 +94,7 @@ li:hover {
   background-color: #f9f9f9;
 }
 
-ul {
+#recommendations-list {
   padding: 35px;
 }
 
@@ -113,11 +113,12 @@ li:first-child {
 
 #back-home-link {
   font-size: 20px;
-  text-align: end;
-  padding-right: 80px;
+  text-align: start;
+  padding-left: 40px;
+  padding-top: 20px;
+  margin: 10px;
 }
 
 #back-home-link a {
   color: #14135d;
-  text-decoration: none;
 }
