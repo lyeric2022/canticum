@@ -1,16 +1,34 @@
-import React from "react";
-import { useLocation } from "react-router-dom"; // Import useLocation to access the passed state
+import React, { useEffect, useState } from "react";
+import { useLocation } from "react-router-dom";
 import "./rec.css";
 
 function Recommendations() {
-  const location = useLocation(); // Access location object
+  const location = useLocation();
+  const { selectedSong } = location.state || {};
+  const [recommendations, setRecommendations] = useState([]);
 
-  // Accessing recommendations directly from location state
-  const recommendations = location.state?.recommendations;
+  useEffect(() => {
+    if (selectedSong) {
+      fetch(
+        `http://127.0.0.1:5000/recommender?input_song_name=${encodeURIComponent(
+          selectedSong.track_name
+        )}&input_artist=${encodeURIComponent(selectedSong.artists)}`
+      )
+        .then((response) => response.json())
+        .then((data) => setRecommendations(data))
+        .catch((error) => {
+          console.error("Error fetching recommendations:", error);
+          alert("Failed to fetch recommendations.");
+        });
+    }
+  }, [selectedSong]);
 
   return (
     <div>
       <h1>Here are some recommendations 🎵</h1>
+      <p id="back-home-link">
+        <a href="/">back to home</a>
+      </p>
       {recommendations && recommendations.length > 0 ? (
         <ul>
           {recommendations.map((rec, index) => (
