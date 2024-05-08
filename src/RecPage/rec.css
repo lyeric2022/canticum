@@ -1,3 +1,4 @@
+/* Integration of existing body styles with enhancements for the Recommendations component */
 @font-face {
   font-family: "Nats";
   src: url("./assets/NATS-Regular.ttf");
@@ -12,9 +13,60 @@ body {
     rgba(238, 174, 202, 1) 0%,
     rgba(148, 187, 233, 1) 100%
   );
-  font-family: Nats;
+  font-family: "Nats", Arial, sans-serif;
 }
 
 h1 {
-  font-family: Nats;
+  font-family: "Nats", Arial, sans-serif;
+  text-align: center;
+  color: #000000;
+  /* font-size: 2.5rem; */
+}
+
+div.recommendations-container {
+  max-width: 800px;
+  margin: 40px auto;
+  padding: 20px;
+  background-color: #ffffff;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+}
+
+ul {
+  list-style: none;
+  /* padding: 20px; */
+}
+
+li {
+  background-color: #dddddd;
+  border: 1px solid #dddddd;
+  margin: 25px;
+  padding: 10px 30px 10px 30px;
+  border-radius: 10px;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+  transition: background-color 0.3s ease;
+}
+
+li p {
+  color: #333;
+  font-size: 16px;
+  line-height: 1.5;
+  margin: 5px 0;
+}
+
+li p strong {
+  font-weight: bold;
+  color: #6a5acd;
+}
+
+li:hover {
+  background-color: #f9f9f9;
+}
+
+ul {
+  padding: 35px;
+} 
+
+li:first-child {
+  margin-top: 0;
 }
