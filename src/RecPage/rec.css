@@ -110,3 +110,14 @@ li:first-child {
   animation-timing-function: ease-in;
   animation-duration: 0.7s;
 }
+
+#back-home-link {
+  font-size: 20px;
+  text-align: end;
+  padding-right: 80px;
+}
+
+#back-home-link a {
+  color: #14135d;
+  text-decoration: none;
+}

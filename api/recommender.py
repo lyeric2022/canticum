@@ -23,22 +23,34 @@ music_features_scaled = scaler.fit_transform(music_features)
 
 
 @app.route('/recommender', methods=['GET'])
+# Music Recommender function
 def hybrid_recommendations():
     try:
         # Retrieve query parameters
-        input_song_name = request.args.get('input_song_name')
-        num_recommendations = int(request.args.get('num_recommendations', 5))
-        genre_weight = float(request.args.get('genre_weight', 0.5))
-        popularity_weight = float(request.args.get('popularity_weight', 0.3))
+        input_song_name = request.args.get('input_song_name', '')
+        input_artist = request.args.get('input_artist', '')
 
-        # Check if the song is in the dataset
-        if input_song_name not in music_data['track_name'].values:
+        # Constant definitions
+        num_recommendations = 10
+        genre_weight = 0.3
+        popularity_weight = 0.2
+
+        # Find song in dataset
+        matching_song = music_data[(music_data['track_name'] == input_song_name) & (
+            music_data['artists'] == input_artist)]
+
+        if matching_song.empty:
             return jsonify({'error': 'Song not found'}), 404
 
-        # Find the indices of the input song
-        input_song_indices = music_data[music_data['track_name']
-                                        == input_song_name].index.tolist()
+        # Find the indices of the input song (put in list since there may be duplicates)
+        input_song_indices = music_data[
+            (music_data['track_name'] == input_song_name) &
+            (music_data['artists'] == input_artist)
+        ].index.tolist()
+
+        # Get scaled music features of input song
         input_song_features = music_features_scaled[input_song_indices[0]]
+        # Get input song genre
         input_song_genre = music_data.iloc[input_song_indices[0]
                                            ]['track_genre']
 
@@ -73,6 +85,22 @@ def hybrid_recommendations():
 
     except Exception as e:
         return jsonify({'error': str(e)}), 500
+
+
+@app.route('/search', methods=['GET'])
+# Song search function; find tracks matching input_song_name in dataset
+def search_songs():
+    # Get search query from api request
+    query = request.args.get('query', '')
+    # Return empty if no tracks found
+    if not query:
+        return jsonify({'results': []})
+
+    # Perform a case-insensitive search for matching songs
+    matching_songs = music_data[music_data['track_name'].str.contains(
+        query, case=False, na=False)]
+
+    return jsonify({'results': matching_songs.to_dict(orient='records')})
 
 
 if __name__ == "__main__":

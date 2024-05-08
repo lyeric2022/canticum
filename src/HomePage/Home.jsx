@@ -4,29 +4,39 @@ import "./homepage.css";
 
 function Home() {
   const navigate = useNavigate();
-  const [songName, setSongName] = useState(""); // To hold the song name
+  const [searchQuery, setSearchQuery] = useState("");
+  const [searchResults, setSearchResults] = useState([]);
+  const [selectedSong, setSelectedSong] = useState(null);
 
-  const recommend = () => {
-    if (!songName.trim()) {
+  const handleSearch = async () => {
+    if (!searchQuery.trim()) {
       alert("Please enter a song name.");
       return;
     }
-    // Perform a fetch request to the Flask API
-    fetch(
-      `http://localhost:5000/recommender?input_song_name=${encodeURIComponent(
-        songName
-      )}&num_recommendations=5`
-    )
-      .then((response) => response.json())
-      .then((data) => {
-        // Handle the response data from the Flask API here
-        console.log(data); // Log data or set it to state
-        navigate("/recommendations", { state: { recommendations: data } });
-      })
-      .catch((error) => {
-        console.error("Error fetching recommendations:", error);
-        alert("Failed to fetch recommendations.");
-      });
+    const response = await fetch(
+      `http://127.0.0.1:5000/search?query=${encodeURIComponent(searchQuery)}`
+    );
+    const data = await response.json();
+    setSearchResults(data.results);
+  };
+
+  const handleSelectSong = (song) => {
+    setSelectedSong(song);
+    console.log(selectedSong);
+  };
+
+  const handleRecommendations = () => {
+    if (!selectedSong) {
+      alert("Please select a song.");
+      return;
+    }
+    navigate("/recommendations", { state: { selectedSong } });
+  };
+
+  const handleKeyPress = (e) => {
+    if (e.key === "Enter") {
+      handleSearch(); // Trigger search when Enter key is pressed
+    }
   };
 
   return (
@@ -39,13 +49,24 @@ function Home() {
           id="song-input"
           type="text"
           placeholder="search for a song"
-          value={songName}
-          onChange={(e) => setSongName(e.target.value)}
+          onChange={(e) => setSearchQuery(e.target.value)}
+          onKeyPress={handleKeyPress}
         />
         <div id="go-button">
-          <button onClick={recommend}>go!</button>
+          <button onClick={handleRecommendations}>Go!</button>
         </div>
       </div>
+      {searchResults && searchResults.length > 0 ? (
+        <ul>
+          {searchResults.map((song) => (
+            <li key={song.track_id} onClick={() => handleSelectSong(song)}>
+              {song.track_name} - {song.artists}
+            </li>
+          ))}
+        </ul>
+      ) : (
+        <p>No matching songs found.</p>
+      )}
     </div>
   );
 }
