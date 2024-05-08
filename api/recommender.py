@@ -21,6 +21,7 @@ music_features = music_data[['danceability', 'energy', 'key', 'loudness', 'mode'
                              'acousticness', 'instrumentalness', 'liveness', 'valence', 'tempo']].values
 music_features_scaled = scaler.fit_transform(music_features)
 
+
 @app.route('/recommender', methods=['GET'])
 def hybrid_recommendations():
     try:
@@ -35,12 +36,15 @@ def hybrid_recommendations():
             return jsonify({'error': 'Song not found'}), 404
 
         # Find the indices of the input song
-        input_song_indices = music_data[music_data['track_name'] == input_song_name].index.tolist()
+        input_song_indices = music_data[music_data['track_name']
+                                        == input_song_name].index.tolist()
         input_song_features = music_features_scaled[input_song_indices[0]]
-        input_song_genre = music_data.iloc[input_song_indices[0]]['track_genre']
+        input_song_genre = music_data.iloc[input_song_indices[0]
+                                           ]['track_genre']
 
         # Calculate cosine similarity
-        similarity_scores = cosine_similarity([input_song_features], music_features_scaled).flatten()
+        similarity_scores = cosine_similarity(
+            [input_song_features], music_features_scaled).flatten()
 
         # Adjust similarity scores based on genre and popularity
         for i in range(len(similarity_scores)):
@@ -51,20 +55,25 @@ def hybrid_recommendations():
             genre_similarity = (song_genre == input_song_genre) * 1.0
             similarity_scores[i] = ((1 - genre_weight) * similarity_scores[i] +
                                     genre_weight * genre_similarity) * \
-                                   ((1 - popularity_weight) + popularity_weight * (song_popularity / 100))
+                                   ((1 - popularity_weight) +
+                                    popularity_weight * (song_popularity / 100))
 
         # Get indices of most similar songs, excluding input song index
-        top_indices = np.argsort(similarity_scores)[::-1][1:num_recommendations+1]
+        top_indices = np.argsort(similarity_scores)[
+            ::-1][1:num_recommendations+1]
 
         # Compile recommendations based on indices
-        recommendations_df = music_data.iloc[top_indices][['track_name', 'artists', 'album_name', 'popularity']]
-        recommendations_df = recommendations_df.drop_duplicates(subset=['track_name', 'artists'], keep='first')
+        recommendations_df = music_data.iloc[top_indices][[
+            'track_name', 'artists', 'album_name', 'popularity', 'track_id']]
+        recommendations_df = recommendations_df.drop_duplicates(
+            subset=['track_name', 'artists'], keep='first')
 
         # Return recommendations as JSON
         return jsonify(recommendations_df.to_dict(orient='records')), 200
 
     except Exception as e:
         return jsonify({'error': str(e)}), 500
+
 
 if __name__ == "__main__":
     app.run(debug=True)

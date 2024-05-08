@@ -18,9 +18,10 @@ body {
 
 h1 {
   font-family: "Nats", Arial, sans-serif;
+  font-size: 40px;
   text-align: center;
   color: #000000;
-  /* font-size: 2.5rem; */
+  margin-bottom: 5px;
 }
 
 div.recommendations-container {
@@ -29,7 +30,7 @@ div.recommendations-container {
   padding: 20px;
   background-color: #ffffff;
   border-radius: 8px;
-  box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
 ul {
@@ -38,18 +39,18 @@ ul {
 }
 
 li {
-  background-color: #dddddd;
-  border: 1px solid #dddddd;
+  background-color: #ededed;
+  border: 1px solid #ededed;
   margin: 25px;
   padding: 10px 30px 10px 30px;
   border-radius: 10px;
-  box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
   transition: background-color 0.3s ease;
 }
 
 li p {
   color: #333;
-  font-size: 16px;
+  font-size: 20px;
   line-height: 1.5;
   margin: 5px 0;
 }
@@ -65,7 +66,7 @@ li:hover {
 
 ul {
   padding: 35px;
-} 
+}
 
 li:first-child {
   margin-top: 0;

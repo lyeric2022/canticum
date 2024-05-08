@@ -10,15 +10,23 @@ function Recommendations() {
 
   return (
     <div>
-      <h1>Here are some recommendations ❤️</h1>
+      <h1>Here are some recommendations 🎵</h1>
       {recommendations && recommendations.length > 0 ? (
         <ul>
           {recommendations.map((rec, index) => (
             <li key={index}>
-              <p><strong>Track:</strong> {rec.track_name}</p>
-              <p><strong>Artist:</strong> {rec.artists}</p>
-              <p><strong>Album:</strong> {rec.album_name}</p>
-              <p><strong>Popularity:</strong> {rec.popularity}</p>
+              <p>
+                <strong>Track:</strong> {rec.track_name}
+              </p>
+              <p>
+                <strong>Artist:</strong> {rec.artists}
+              </p>
+              <p>
+                <strong>Album:</strong> {rec.album_name}
+              </p>
+              <p>
+                <strong>Popularity:</strong> {rec.popularity}
+              </p>
             </li>
           ))}
         </ul>
