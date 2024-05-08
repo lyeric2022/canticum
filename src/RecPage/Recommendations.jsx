@@ -31,7 +31,7 @@ function Recommendations() {
           ))}
         </ul>
       ) : (
-        <p>No recommendations to display.</p>
+        <p id="no-rec-text">No recommendations to display.</p>
       )}
     </div>
   );
