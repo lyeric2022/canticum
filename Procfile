@@ -1,1 +1,1 @@
-web: python recommender.py
+web: gunicorn recommender:app
