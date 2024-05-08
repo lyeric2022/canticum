@@ -48,10 +48,11 @@ def hybrid_recommendations():
                 continue  # Skip the input song
             song_genre = music_data.iloc[i]['track_genre']
             song_popularity = music_data.iloc[i]['popularity']
-            similarity_scores[i] = (1 - genre_weight) * similarity_scores[i] + \
-                                   genre_weight * (song_genre == input_song_genre)
-            similarity_scores[i] = (1 - popularity_weight) * similarity_scores[i] + \
-                                   popularity_weight * (song_popularity / 100.0)
+            # Incorporate more nuanced genre similarity
+            genre_similarity = (song_genre == input_song_genre) * 1.0  # Binary similarity, could be improved
+            similarity_scores[i] = ((1 - genre_weight) * similarity_scores[i] +
+                                    genre_weight * genre_similarity) * \
+                                   ((1 - popularity_weight) + popularity_weight * (song_popularity / 100))
 
         # Get indices of most similar songs, excluding input song index
         top_indices = np.argsort(similarity_scores)[::-1][1:num_recommendations+1]  # Exclude the input song
