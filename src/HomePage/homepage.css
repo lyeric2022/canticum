@@ -134,6 +134,6 @@ body {
 #search-results-list h2 {
   margin: 0px;
   animation-name: fadeInFromBottom;
-  animation-duration: 1.5s;
+  animation-duration: 1s;
   animation-timing-function: ease-in;
 }
