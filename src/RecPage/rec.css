@@ -6,6 +6,28 @@
   font-style: normal;
 }
 
+@keyframes fadeInFromTop {
+  from {
+    opacity: 0;
+    transform: translateY(-30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeInFromBottom {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
 body {
   background: rgb(238, 174, 202);
   background: linear-gradient(
@@ -22,6 +44,10 @@ h1 {
   text-align: center;
   color: #000000;
   margin-bottom: 5px;
+
+  animation-name: fadeInFromTop;
+  animation-timing-function: ease-in;
+  animation-duration: 0.7s;
 }
 
 div.recommendations-container {
@@ -46,6 +72,10 @@ li {
   border-radius: 10px;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
   transition: background-color 0.3s ease;
+
+  animation-name: fadeInFromBottom;
+  animation-timing-function: ease-in;
+  animation-duration: 1s;
 }
 
 li p {
@@ -70,4 +100,13 @@ ul {
 
 li:first-child {
   margin-top: 0;
+}
+
+#no-rec-text {
+  font-size: 30px;
+  padding-left: 30px;
+
+  animation-name: fadeInFromBottom;
+  animation-timing-function: ease-in;
+  animation-duration: 0.7s;
 }
