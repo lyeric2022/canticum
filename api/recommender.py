@@ -39,6 +39,7 @@ def hybrid_recommendations():
         matching_song = music_data[(music_data['track_name'] == input_song_name) & (
             music_data['artists'] == input_artist)]
 
+        # Return error if song not found in dataset
         if matching_song.empty:
             return jsonify({'error': 'Song not found'}), 404
 
@@ -77,10 +78,11 @@ def hybrid_recommendations():
         # Compile recommendations based on indices
         recommendations_df = music_data.iloc[top_indices][[
             'track_name', 'artists', 'album_name', 'popularity', 'track_id']]
+        # Remove duplicate songs if any
         recommendations_df = recommendations_df.drop_duplicates(
             subset=['track_name', 'artists'], keep='first')
 
-        # Return recommendations as JSON
+        # Return recommendations as JSON object
         return jsonify(recommendations_df.to_dict(orient='records')), 200
 
     except Exception as e:
