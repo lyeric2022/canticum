@@ -5,6 +5,28 @@
   font-style: normal;
 }
 
+@keyframes fadeInFromTop {
+  from {
+    opacity: 0;
+    transform: translateY(-60px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeInFromBottom {
+  from {
+    opacity: 0;
+    transform: translateY(60px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
 body {
   background: rgb(238, 174, 202);
   background: linear-gradient(
@@ -13,6 +35,7 @@ body {
     rgba(148, 187, 233, 1) 100%
   );
   font-family: Nats;
+  min-height: 100vh;
 }
 
 #main {
@@ -23,19 +46,29 @@ body {
 }
 
 #title {
-  height: 250px;
+  padding-bottom: 10px;
+  margin-bottom: 10px;
 }
 
-#title p {
-  font-size: 100px;
+#title h1 {
+  font-size: 150px;
   font-weight: bold;
   color: #14135d;
-  padding-bottom: 10px;
+  margin: 10px;
+  height: 190px;
+
+  animation-name: fadeInFromTop;
+  animation-duration: 1.5s;
+  animation-timing-function: ease-in;
 }
 
 #input-box {
   padding: 20px;
   display: flex;
+
+  animation-name: fadeInFromBottom;
+  animation-duration: 1.5s;
+  animation-timing-function: ease-in;
 }
 
 #song-input {
@@ -64,9 +97,9 @@ body {
 }
 
 #go-button button:hover {
-  background-color: #f1b5f1;
+  background-color: #ad8cc9;
   scale: 1.07;
-  transition: all 0.3s;
+  transition: all 0.5s;
 }
 
 #desc-div {
@@ -74,7 +107,7 @@ body {
   flex-direction: column;
 
   width: 500px;
-  padding-top: 150px;
+  padding-top: 50vh;
   padding-bottom: 100px;
 }
 
@@ -84,6 +117,6 @@ body {
   color: #14135d;
 }
 
-#desc-div text {
+#desc-div p {
   font-size: 25px;
 }

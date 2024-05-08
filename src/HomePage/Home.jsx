@@ -12,14 +12,18 @@ function Home() {
       return;
     }
     // Perform a fetch request to the Flask API
-    fetch(`http://localhost:5000/recommender?input_song_name=${encodeURIComponent(songName)}&num_recommendations=5`)
-      .then(response => response.json())
-      .then(data => {
+    fetch(
+      `http://localhost:5000/recommender?input_song_name=${encodeURIComponent(
+        songName
+      )}&num_recommendations=5`
+    )
+      .then((response) => response.json())
+      .then((data) => {
         // Handle the response data from the Flask API here
         console.log(data); // Log data or set it to state
-        navigate('/recommendations', { state: { recommendations: data } });
+        navigate("/recommendations", { state: { recommendations: data } });
       })
-      .catch(error => {
+      .catch((error) => {
         console.error("Error fetching recommendations:", error);
         alert("Failed to fetch recommendations.");
       });
@@ -28,15 +32,15 @@ function Home() {
   return (
     <div id="main">
       <div id="title">
-        <p>Canticum</p>
+        <h1>Canticum</h1>
       </div>
       <div id="input-box">
-        <input 
-          id="song-input" 
-          type="text" 
-          placeholder="search for a song" 
+        <input
+          id="song-input"
+          type="text"
+          placeholder="search for a song"
           value={songName}
-          onChange={e => setSongName(e.target.value)}
+          onChange={(e) => setSongName(e.target.value)}
         />
         <div id="go-button">
           <button onClick={recommend}>go!</button>
@@ -44,9 +48,7 @@ function Home() {
       </div>
       <div id="desc-div">
         <h1>About Canticum</h1>
-        <p>Description here</p>
-        <h1>Directions</h1>
-        <p>Directions here</p>
+        <p>Description</p>
       </div>
     </div>
   );
