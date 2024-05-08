@@ -131,7 +131,7 @@ body {
   padding-top: 0px;
 }
 
-#search-results-list h2 {
+h2 {
   margin: 0px;
   animation-name: fadeInFromBottom;
   animation-duration: 1s;

@@ -7,7 +7,9 @@ function Home() {
   const [searchQuery, setSearchQuery] = useState("");
   const [searchResults, setSearchResults] = useState([]);
   const [selectedSong, setSelectedSong] = useState(null);
+  const [searchInitiated, setSearchInitiated] = useState(false);
 
+  // Fetch search data from /search api
   const handleSearch = async () => {
     if (!searchQuery.trim()) {
       alert("Please enter a song name.");
@@ -18,13 +20,16 @@ function Home() {
     );
     const data = await response.json();
     setSearchResults(data.results);
+    setSearchInitiated(true);
   };
 
+  // Set selected song
   const handleSelectSong = (song) => {
     setSelectedSong(song);
     console.log(selectedSong);
   };
 
+  // Redirect to recommendations page with input song
   const handleRecommendations = () => {
     if (!selectedSong) {
       alert("Please hit ENTER or select a song.");
@@ -33,9 +38,10 @@ function Home() {
     navigate("/recommendations", { state: { selectedSong } });
   };
 
+  // Trigger search when Enter key is pressed
   const handleKeyPress = (e) => {
     if (e.key === "Enter") {
-      handleSearch(); // Trigger search when Enter key is pressed
+      handleSearch();
     }
   };
 
@@ -56,28 +62,32 @@ function Home() {
           <button onClick={handleRecommendations}>Go!</button>
         </div>
       </div>
-      {searchResults && searchResults.length > 0 ? (
-        <ul id="search-results-list">
-          {!selectedSong ? (
-            <h2>Please select a song:</h2>
+      {searchInitiated && (
+        <div>
+          {searchResults && searchResults.length > 0 ? (
+            <ul id="search-results-list">
+              {!selectedSong ? (
+                <h2>Please select a song:</h2>
+              ) : (
+                <h2>
+                  Currently selected: {selectedSong.track_name} by{" "}
+                  {selectedSong.artists}
+                </h2>
+              )}
+              {searchResults.map((song) => (
+                <li
+                  className="search-result"
+                  key={song.track_id}
+                  onClick={() => handleSelectSong(song)}
+                >
+                  {song.track_name} - {song.artists}
+                </li>
+              ))}
+            </ul>
           ) : (
-            <h2>
-              Currently selected: {selectedSong.track_name} by{" "}
-              {selectedSong.artists}
-            </h2>
+            <h2>No matching songs found.</h2>
           )}
-          {searchResults.map((song) => (
-            <li
-              className="search-result"
-              key={song.track_id}
-              onClick={() => handleSelectSong(song)}
-            >
-              {song.track_name} - {song.artists}
-            </li>
-          ))}
-        </ul>
-      ) : (
-        <p>No matching songs found.</p>
+        </div>
       )}
     </div>
   );

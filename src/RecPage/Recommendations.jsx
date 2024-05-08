@@ -7,6 +7,7 @@ function Recommendations() {
   const { selectedSong } = location.state || {};
   const [recommendations, setRecommendations] = useState([]);
 
+  // Fetch song recommendations from /recommender api
   useEffect(() => {
     if (selectedSong) {
       fetch(
