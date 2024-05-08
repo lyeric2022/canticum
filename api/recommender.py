@@ -5,6 +5,7 @@ from sklearn.metrics.pairwise import cosine_similarity
 from pathlib import Path
 from flask import Flask, request, jsonify
 from flask_cors import CORS
+from waitress import serve  # Import waitress
 
 app = Flask(__name__)
 CORS(app)  # Apply CORS to all routes and all origins by default
@@ -48,13 +49,13 @@ def hybrid_recommendations():
                 continue  # Skip the input song
             song_genre = music_data.iloc[i]['track_genre']
             song_popularity = music_data.iloc[i]['popularity']
-            similarity_scores[i] = (1 - genre_weight) * similarity_scores[i] + \
-                                   genre_weight * (song_genre == input_song_genre)
-            similarity_scores[i] = (1 - popularity_weight) * similarity_scores[i] + \
-                                   popularity_weight * (song_popularity / 100.0)
+            genre_similarity = (song_genre == input_song_genre) * 1.0
+            similarity_scores[i] = ((1 - genre_weight) * similarity_scores[i] +
+                                    genre_weight * genre_similarity) * \
+                                   ((1 - popularity_weight) + popularity_weight * (song_popularity / 100))
 
         # Get indices of most similar songs, excluding input song index
-        top_indices = np.argsort(similarity_scores)[::-1][1:num_recommendations+1]  # Exclude the input song
+        top_indices = np.argsort(similarity_scores)[::-1][1:num_recommendations+1]
 
         # Compile recommendations based on indices
         recommendations_df = music_data.iloc[top_indices][['track_name', 'artists', 'album_name', 'popularity']]
@@ -66,5 +67,5 @@ def hybrid_recommendations():
     except Exception as e:
         return jsonify({'error': str(e)}), 500
 
-if __name__ == "__main__":
-    app.run(debug=True)
+if __name__ == '__main__':
+    serve(app, host='0.0.0.0', port=8080)
