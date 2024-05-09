@@ -11,6 +11,7 @@
     opacity: 0;
     transform: translateY(-30px);
   }
+
   to {
     opacity: 1;
     transform: translateY(0);
@@ -22,6 +23,7 @@
     opacity: 0;
     transform: translateY(30px);
   }
+
   to {
     opacity: 1;
     transform: translateY(0);
@@ -30,11 +32,9 @@
 
 body {
   background: rgb(238, 174, 202);
-  background: linear-gradient(
-    59deg,
-    rgba(238, 174, 202, 1) 0%,
-    rgba(148, 187, 233, 1) 100%
-  );
+  background: linear-gradient(59deg,
+      rgba(238, 174, 202, 1) 0%,
+      rgba(148, 187, 233, 1) 100%);
   font-family: "Nats", Arial, sans-serif;
 }
 
@@ -65,7 +65,7 @@ ul {
 }
 
 li {
-  background-color: #ededed;
+  background-color: #dadada;
   border: 1px solid #ededed;
   margin: 25px;
   padding: 10px 30px 10px 30px;
@@ -76,6 +76,7 @@ li {
   animation-name: fadeInFromBottom;
   animation-timing-function: ease-in;
   animation-duration: 1s;
+
 }
 
 li p {
@@ -111,14 +112,63 @@ li:first-child {
   animation-duration: 0.7s;
 }
 
-#back-home-link {
+.back-home-link {
+  font-family: "Nats";
   font-size: 20px;
-  text-align: start;
-  padding-left: 40px;
-  padding-top: 20px;
-  margin: 10px;
+  padding: 10px;
+  margin-left: 60px;
+  margin-top: 20px;
+  border-radius: 10px;
+  border: 1px solid #ededed;
+  display: inline-block;
+
 }
 
-#back-home-link a {
+/* #back-home-link a {
   color: #14135d;
+} */
+
+.song-section {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.song-section-info {
+  width: 1000px;
+}
+
+.song-section-features {
+  width: 400px;
+}
+
+.listen-button {
+  font-family: "Nats";
+  background-color: #ff6e6e;
+  color: #FFFFFF;
+  border: none;
+  padding: 5px 15px;
+  font-size: 18px;
+  font-weight: bold;
+  border-radius: 5px;
+  cursor: pointer;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+  transition: background-color 0.3s;
+  margin-left: 0px;
+  margin-bottom: 15px;
+  margin-top: 5px;
+  
+}
+
+.listen-button:hover {
+  background-color: #CC0000;
+  /* Darker red on hover */
+}
+
+.listen-button:focus {
+  outline: none;
+  /* Remove focus outline */
 }

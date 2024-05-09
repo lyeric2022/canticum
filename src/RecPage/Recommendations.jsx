@@ -7,7 +7,6 @@ function Recommendations() {
   const { selectedSong } = location.state || {};
   const [recommendations, setRecommendations] = useState([]);
 
-  // Fetch song recommendations from /recommender api
   useEffect(() => {
     if (selectedSong) {
       fetch(
@@ -24,33 +23,53 @@ function Recommendations() {
     }
   }, [selectedSong]);
 
+  const handleSongClick = (trackName) => {
+    const url = `https://www.youtube.com/results?search_query=${encodeURIComponent(trackName)}`;
+    window.open(url, '_blank');
+  };
+
   return (
     <div>
-      <p id="back-home-link">
-        <a href="/">back to home</a>
-      </p>
-      <h1>Here are some recommendations 🎵</h1>
+      <button className="back-home-link">
+        <a href="/">Return Home</a>
+      </button>
+      <h1>Curated Music Picks for You 🎵</h1>
       {recommendations && recommendations.length > 0 ? (
         <ul id="recommendations-list">
           {recommendations.map((rec, index) => (
-            <li key={index}>
-              <p>
-                <strong>Track:</strong> {rec.track_name}
-              </p>
-              <p>
-                <strong>Artist:</strong> {rec.artists}
-              </p>
-              <p>
-                <strong>Album:</strong> {rec.album_name}
-              </p>
-              <p>
-                <strong>Popularity:</strong> {rec.popularity}
-              </p>
+            <li className="song-section" key={index}>
+              <div className="song-section-info">
+                <p><strong>Track:</strong> {rec.track_name}</p>
+                <p><strong>Artist:</strong> {rec.artists}</p>
+                <p><strong>Genre:</strong> {rec.track_genre}</p>
+                <p><strong>Popularity:</strong> {rec.popularity}</p>
+                <p><strong>Similarity Score:</strong> {100 * rec.similarity_score.toFixed(2)}%</p>
+              </div>
+              <div className="song-section-features">
+                <div className="song-features">
+                  <p><strong>Danceability:</strong> {rec.danceability}</p>
+                  <p><strong>Energy:</strong> {rec.energy}</p>
+                  <p><strong>Key:</strong> {rec.key}</p>
+                  <p><strong>Loudness:</strong> {rec.loudness}</p>
+                  <p><strong>Speechiness:</strong> {rec.speechiness}</p>
+                  <p><strong>Acousticness:</strong> {rec.acousticness}</p>
+                </div>
+              </div>
+              <div className="song-section-features">
+                <div className="song-features">
+                  <p><strong>Instrumentalness:</strong> {rec.instrumentalness.toFixed(4)}</p>
+                  <p><strong>Liveness:</strong> {rec.liveness}</p>
+                  <p><strong>Valence:</strong> {rec.valence}</p>
+                  <p><strong>Tempo:</strong> {rec.tempo}</p>
+                  <button className="listen-button" onClick={() => handleSongClick(rec.track_name)}>Listen on YouTube</button>
+
+                </div>
+              </div>
             </li>
           ))}
         </ul>
       ) : (
-        <p id="no-rec-text">No recommendations to display.</p>
+        <p id="no-rec-text">Loading Recommendations...</p>
       )}
     </div>
   );

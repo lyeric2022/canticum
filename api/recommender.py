@@ -31,7 +31,7 @@ def hybrid_recommendations():
         input_artist = request.args.get('input_artist', '')
 
         # Constant definitions
-        num_recommendations = 10
+        num_recommendations = 20
         genre_weight = 0.3
         popularity_weight = 0.2
 
@@ -77,7 +77,11 @@ def hybrid_recommendations():
 
         # Compile recommendations based on indices
         recommendations_df = music_data.iloc[top_indices][[
-            'track_name', 'artists', 'album_name', 'popularity', 'track_id']]
+            'track_name', 'artists', 'track_genre', 'popularity', 'track_id',
+            'danceability', 'energy', 'key', 'loudness', 'mode', 'speechiness',
+            'acousticness', 'instrumentalness', 'liveness', 'valence', 'tempo']]
+        recommendations_df['similarity_score'] = similarity_scores[top_indices]     # Add similarity scores
+
         # Remove duplicate songs if any
         recommendations_df = recommendations_df.drop_duplicates(
             subset=['track_name', 'artists'], keep='first')

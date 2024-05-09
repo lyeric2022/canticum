@@ -10,6 +10,7 @@
     opacity: 0;
     transform: translateY(-60px);
   }
+
   to {
     opacity: 1;
     transform: translateY(0);
@@ -21,6 +22,7 @@
     opacity: 0;
     transform: translateY(60px);
   }
+
   to {
     opacity: 1;
     transform: translateY(0);
@@ -29,11 +31,9 @@
 
 body {
   background: rgb(238, 174, 202);
-  background: linear-gradient(
-    59deg,
-    rgba(238, 174, 202, 1) 0%,
-    rgba(148, 187, 233, 1) 100%
-  );
+  background: linear-gradient(59deg,
+      rgba(238, 174, 202, 1) 0%,
+      rgba(148, 187, 233, 1) 100%);
   font-family: Nats;
   min-height: 100vh;
 }
@@ -121,9 +121,13 @@ body {
   font-size: 25px;
 }
 
+
 .search-result {
-  min-width: 400px;
+
+  min-width: 60vw;
   font-size: 20px;
+
+
 }
 
 .search-result:active {
