@@ -139,8 +139,9 @@ li:first-child {
 }
 
 .button-links {
-  display: inline-block;
+  display: flex;
   align-items: center;
+  justify-content: center;
 }
 
 .listen-button {
