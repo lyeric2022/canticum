@@ -33,7 +33,7 @@ def hybrid_recommendations():
         # Constant definitions
         num_recommendations = 10
         genre_weight = 0.3
-        popularity_weight = 0.2
+        popularity_weight = 0.1
 
         # Find song in dataset
         matching_song = music_data[(music_data['track_name'] == input_song_name) & (
