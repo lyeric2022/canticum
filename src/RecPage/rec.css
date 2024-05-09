@@ -32,9 +32,11 @@
 
 body {
   background: rgb(238, 174, 202);
-  background: linear-gradient(59deg,
-      rgba(238, 174, 202, 1) 0%,
-      rgba(148, 187, 233, 1) 100%);
+  background: linear-gradient(
+    59deg,
+    rgba(238, 174, 202, 1) 0%,
+    rgba(148, 187, 233, 1) 100%
+  );
   font-family: "Nats", Arial, sans-serif;
 }
 
@@ -76,7 +78,6 @@ li {
   animation-name: fadeInFromBottom;
   animation-timing-function: ease-in;
   animation-duration: 1s;
-
 }
 
 li p {
@@ -121,12 +122,7 @@ li:first-child {
   border-radius: 10px;
   border: 1px solid #ededed;
   display: inline-block;
-
 }
-
-/* #back-home-link a {
-  color: #14135d;
-} */
 
 .song-section {
   display: flex;
@@ -142,30 +138,30 @@ li:first-child {
   width: 400px;
 }
 
+.button-links {
+  display: inline-block;
+  align-items: center;
+}
+
 .listen-button {
-  font-family: "Nats";
-  background-color: #ff6e6e;
-  color: #FFFFFF;
   border: none;
+  background-color: transparent;
   padding: 5px 15px;
-  font-size: 18px;
-  font-weight: bold;
   border-radius: 5px;
   cursor: pointer;
-  text-align: center;
-  text-decoration: none;
-  display: inline-block;
-  box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
-  transition: background-color 0.3s;
   margin-left: 0px;
   margin-bottom: 15px;
   margin-top: 5px;
-  
+}
+
+.listen-button img {
+  width: 30px;
+  max-height: 30px;
 }
 
 .listen-button:hover {
-  background-color: #CC0000;
-  /* Darker red on hover */
+  scale: 1.2;
+  transition: all 0.3s;
 }
 
 .listen-button:focus {

@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 import "./rec.css";
+import youtubeLogo from "../assets/youtube.png";
+import spotifyLogo from "../assets/spotify.png";
 
 function Recommendations() {
   const location = useLocation();
@@ -23,9 +25,16 @@ function Recommendations() {
     }
   }, [selectedSong]);
 
-  const handleSongClick = (trackName) => {
-    const url = `https://www.youtube.com/results?search_query=${encodeURIComponent(trackName)}`;
-    window.open(url, '_blank');
+  const handleSpotifyClick = (trackId) => {
+    const url = `http://open.spotify.com/track/${encodeURIComponent(trackId)}`;
+    window.open(url, "_blank");
+  };
+
+  const handleYoutubeClick = (trackName, trackArtist) => {
+    const url = `https://www.youtube.com/results?search_query=${encodeURIComponent(
+      trackName
+    )} ${encodeURIComponent(trackArtist)}`;
+    window.open(url, "_blank");
   };
 
   return (
@@ -39,30 +48,78 @@ function Recommendations() {
           {recommendations.map((rec, index) => (
             <li className="song-section" key={index}>
               <div className="song-section-info">
-                <p><strong>Track:</strong> {rec.track_name}</p>
-                <p><strong>Artist:</strong> {rec.artists}</p>
-                <p><strong>Genre:</strong> {rec.track_genre}</p>
-                <p><strong>Popularity:</strong> {rec.popularity}</p>
-                <p><strong>Similarity Score:</strong> {100 * rec.similarity_score.toFixed(2)}%</p>
+                <p>
+                  <strong>Track:</strong> {rec.track_name}
+                </p>
+                <p>
+                  <strong>Artist:</strong> {rec.artists}
+                </p>
+                <p>
+                  <strong>Genre:</strong> {rec.track_genre}
+                </p>
+                <p>
+                  <strong>Popularity:</strong> {rec.popularity}
+                </p>
+                <p>
+                  <strong>Similarity Score:</strong>{" "}
+                  {100 * rec.similarity_score.toFixed(2)}%
+                </p>
               </div>
               <div className="song-section-features">
                 <div className="song-features">
-                  <p><strong>Danceability:</strong> {rec.danceability}</p>
-                  <p><strong>Energy:</strong> {rec.energy}</p>
-                  <p><strong>Key:</strong> {rec.key}</p>
-                  <p><strong>Loudness:</strong> {rec.loudness}</p>
-                  <p><strong>Speechiness:</strong> {rec.speechiness}</p>
-                  <p><strong>Acousticness:</strong> {rec.acousticness}</p>
+                  <p>
+                    <strong>Danceability:</strong> {rec.danceability}
+                  </p>
+                  <p>
+                    <strong>Energy:</strong> {rec.energy}
+                  </p>
+                  <p>
+                    <strong>Key:</strong> {rec.key}
+                  </p>
+                  <p>
+                    <strong>Loudness:</strong> {rec.loudness}
+                  </p>
+                  <p>
+                    <strong>Speechiness:</strong> {rec.speechiness}
+                  </p>
+                  <p>
+                    <strong>Acousticness:</strong> {rec.acousticness}
+                  </p>
                 </div>
               </div>
               <div className="song-section-features">
                 <div className="song-features">
-                  <p><strong>Instrumentalness:</strong> {rec.instrumentalness.toFixed(4)}</p>
-                  <p><strong>Liveness:</strong> {rec.liveness}</p>
-                  <p><strong>Valence:</strong> {rec.valence}</p>
-                  <p><strong>Tempo:</strong> {rec.tempo}</p>
-                  <button className="listen-button" onClick={() => handleSongClick(rec.track_name)}>Listen on YouTube</button>
-
+                  <p>
+                    <strong>Instrumentalness:</strong>{" "}
+                    {rec.instrumentalness.toFixed(4)}
+                  </p>
+                  <p>
+                    <strong>Liveness:</strong> {rec.liveness}
+                  </p>
+                  <p>
+                    <strong>Valence:</strong> {rec.valence}
+                  </p>
+                  <p>
+                    <strong>Tempo:</strong> {rec.tempo}
+                  </p>
+                  <div className="button-links">
+                    <button
+                      className="listen-button"
+                      id="spotify-button"
+                      onClick={() => handleSpotifyClick(rec.track_id)}
+                    >
+                      <img src={spotifyLogo} />
+                    </button>
+                    <button
+                      className="listen-button"
+                      id="youtube-button"
+                      onClick={() =>
+                        handleYoutubeClick(rec.track_name, rec.artists)
+                      }
+                    >
+                      <img src={youtubeLogo} />
+                    </button>
+                  </div>
                 </div>
               </div>
             </li>
