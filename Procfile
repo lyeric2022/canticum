@@ -1,1 +1,1 @@
-web: python api/recommender.py
+web: python3 api/recommender.py
