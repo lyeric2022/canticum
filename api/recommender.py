@@ -5,6 +5,7 @@ from sklearn.metrics.pairwise import cosine_similarity
 from pathlib import Path
 from flask import Flask, request, jsonify
 from flask_cors import CORS
+import os
 
 app = Flask(__name__)
 CORS(app)  # Apply CORS to all routes and all origins by default
@@ -110,4 +111,5 @@ def search_songs():
 
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    port = int(os.environ.get('PORT', 5000))
+    app.run(host='0.0.0.0', port=port)
